@@ -1,0 +1,16 @@
+# MacOS related
+.DS_Store
+
+# Sublime 
+cp.sublime-workspace
+
+# Build folder
+build/
+
+# Test files
+test
+test.cpp
+
+# IO files
+input.*
+output.*
