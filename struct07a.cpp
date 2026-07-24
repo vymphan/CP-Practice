@@ -37,13 +37,27 @@ void Solve() {
 		v.push_back(s);
 	}
 
-	std::vector<Student> v2;
-	for (const auto &s : v) {
-		if (s.gpa >= 1.0)
-			v2.push_back(s);
-	}
 
-	for (auto &s : v2) {
+	int left = 0;
+	while (left < n) {
+		if (v[left].gpa < 1.0) {
+			break;
+		}
+		left++;
+	}
+	int right = left + 1;
+	while (left < n && right < n) {
+		if (v[right].gpa >= 1.0) {
+			//swap
+			std::swap(v[left], v[right]);
+			left++;
+			right++;
+		} else {
+			right++;
+		}
+	}
+	v.erase(v.begin() + left, v.end());
+	for (auto &s : v) {
 		s.print();
 	}
 

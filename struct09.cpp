@@ -16,36 +16,33 @@ struct Student {
 	std::string address;
 	double gpa;
 
-	void print() {
-		std::cout << name << " " << dob << " " << address << " "
-			<< std::fixed << std::setprecision(2) << gpa << endl;
-	}
 };
 
 void Solve() {
 	int n;
 	std::cin >> n;
 	std::cin.ignore();
-	std::vector<Student> v;
-	for (int i = 0; i < n; ++i) {
+	std::map<std::string, int> mp;
+	int maxs = 0;
+	for (int i = 0; i < n; i++) {
 		Student s;
 		std::getline(std::cin, s.name);
 		std::getline(std::cin, s.dob);
 		std::getline(std::cin, s.address);
 		std::cin >> s.gpa;
 		std::cin.ignore();
-		v.push_back(s);
+		mp[s.address]++;
+
+		if (mp[s.address] > maxs) {
+			maxs = mp[s.address];
+		}
 	}
 
-	std::vector<Student> v2;
-	for (const auto &s : v) {
-		if (s.gpa >= 1.0)
-			v2.push_back(s);
+	for (auto &[city, freq] : mp) {
+		if (freq == maxs)
+			std::cout << city << endl;
 	}
 
-	for (auto &s : v2) {
-		s.print();
-	}
 
 }
 

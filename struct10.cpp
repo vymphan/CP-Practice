@@ -15,12 +15,13 @@ struct Student {
 	std::string dob;
 	std::string address;
 	double gpa;
-
-	void print() {
-		std::cout << name << " " << dob << " " << address << " "
-			<< std::fixed << std::setprecision(2) << gpa << endl;
-	}
 };
+
+bool isBornInApril(Student s) {
+	if ((s.dob[1] == '/' && s.dob[2] == '4') || (s.dob[2] == '/' && s.dob[3] == '4'))
+		return true;
+	return false;
+}
 
 void Solve() {
 	int n;
@@ -37,16 +38,12 @@ void Solve() {
 		v.push_back(s);
 	}
 
-	std::vector<Student> v2;
 	for (const auto &s : v) {
-		if (s.gpa >= 1.0)
-			v2.push_back(s);
+		if (isBornInApril(s)) {
+			std::cout << s.name << " " << s.dob << " " << s.address << " "
+				<< std::fixed << std::setprecision(2) << s.gpa << endl;
+		}
 	}
-
-	for (auto &s : v2) {
-		s.print();
-	}
-
 }
 
 int main() {

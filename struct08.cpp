@@ -22,29 +22,30 @@ struct Student {
 	}
 };
 
+bool cmp(Student s1, Student s2) {
+	if (s1.address != s2.address) {
+		return s1.address < s2.address;
+	}
+	return s1.gpa > s2.gpa;
+}
+
 void Solve() {
 	int n;
 	std::cin >> n;
 	std::cin.ignore();
 	std::vector<Student> v;
 	for (int i = 0; i < n; ++i) {
-		Student s;
-		std::getline(std::cin, s.name);
-		std::getline(std::cin, s.dob);
-		std::getline(std::cin, s.address);
-		std::cin >> s.gpa;
+		Student student;
+		std::getline(std::cin, student.name);
+		std::getline(std::cin, student.dob);
+		std::getline(std::cin, student.address);
+		std::cin >> student.gpa;
 		std::cin.ignore();
-		v.push_back(s);
+		v.push_back(student);
 	}
-
-	std::vector<Student> v2;
-	for (const auto &s : v) {
-		if (s.gpa >= 1.0)
-			v2.push_back(s);
-	}
-
-	for (auto &s : v2) {
-		s.print();
+	std::sort(v.begin(), v.end(), cmp);
+	for (auto &student : v) {
+		student.print();
 	}
 
 }
